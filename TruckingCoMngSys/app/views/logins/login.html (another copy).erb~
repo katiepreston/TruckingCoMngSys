@@ -1,0 +1,15 @@
+<% content_for :title do %>
+Login
+<% end %>
+    <div id="content">
+      <form action="authenticate" method="post">
+        <label>USERNAME</label>
+        <input type="textfield" name="username"/>
+        <label>PASSWORD</label>
+        <input type="password" name="password"/>
+        <div>
+          <input type="submit" name="submitButton" value="Submit"/>
+        </div>
+      </form>
+    </div>
+

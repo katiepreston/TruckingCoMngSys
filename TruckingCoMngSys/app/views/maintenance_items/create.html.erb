@@ -1,0 +1,54 @@
+<%= form_for @maintenance_item, controller: "maintenance_items", action: "create" do |f| %>
+  <% if @maintenance_item.maintenance_type.errors.any? %>
+    <div id="error_explanation" style="color:red;">
+      <h2><%= pluralize(@maintenance_item.maintenance_type.errors.count, "error") %> prohibited this maintenance ite from being saved:</h2>
+
+      <ul>
+      <% @maintenance_item.maintenance_type.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          Maintenance Item Type
+        </td>
+        <td>
+          <%= select_tag :maintenance_type, options_for_select([["Repair", "RepairRecord"], ["Routine Inspection", "RoutineInspection"], ["Routine Maintenance", "RoutineMaintenance"]]) %>
+        </td>
+      </tr>
+      <%= hidden_field_tag :vid, params[:vid] %>
+      <%= f.fields_for :maintenance_type, @maintenance_item.maintenance_type do |mt| %>
+      <tr>
+        <td>
+          Description
+        </td>
+        <td>
+          <%= mt.text_area :description, size: "40x4" %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Time Performed
+        </td>
+        <td>
+          <%= mt.datetime_select :performed_at, ampm: true, prompt: true %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= submit_tag "Create New Item" %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+      <% end %>
+<% end %>
+
+<div>
+<%= link_to "Cancel", controller: "maintenance_records", action: "edit", id: Vehicle.find(params[:vid]).maintenance_record.id, vid: params[:vid] %>
+</div>

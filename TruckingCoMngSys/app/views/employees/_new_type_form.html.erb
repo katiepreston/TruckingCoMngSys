@@ -1,0 +1,160 @@
+<%= form_for(@employee) do |f| %>
+  <% if @employee.errors.any? %>
+    <div id="error_explanation" style="color:red;">
+      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+
+      <ul>
+      <% @employee.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <%= f.label :first_name, "First Name" %>
+        </td>
+        <td>
+          <%= f.text_field :first_name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :middle_name, "Middle Name" %>
+        </td>
+        <td>
+          <%= f.text_field :middle_name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :last_name, "Last Name" %>
+        </td>
+        <td>
+          <%= f.text_field :last_name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :home_phone, "Home Phone" %>
+        </td>
+        <td>
+          <%= f.text_field :home_phone %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :cell_phone, "Cell Phone Number" %>
+        </td>
+        <td>
+          <%= f.text_field :cell_phone %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :pay_rate, "Pay Rate / Hour" %>
+        </td>
+        <td>
+          <%= f.text_field :pay_rate %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :started_at, "Starting Date" %>
+        </td>
+        <td>
+          <%= f.datetime_select :started_at, prompt: true, ampm: true %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :ended_at, "Termination Date" %>
+        </td>
+        <td>
+          <%= f.datetime_select :ended_at, prompt: true, ampm: true %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :username, "Username" %>
+        </td>
+        <td>
+          <%= f.text_field :username %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :password, "Password" %>
+        </td>
+        <td>
+          <%= f.password_field :password %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :password_confirmation, "Confirm Password" %>
+        </td>
+        <td>
+          <%= f.password_field :password_confirmation %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :account_type, "Account Type" %>
+        </td>
+        <td>
+          <%= f.select :account_type, options_for_select([["Full", EmployeesController::Full], ["Shipping", EmployeesController::Shipping], ["Maintenance", EmployeesController::Maintenance], ["Driver", EmployeesController::Driver]]) %>
+        </td>
+      </tr>
+      <%= f.fields_for :address do |address_f| %>
+      <tr>
+        <td>
+          <%= address_f.label :street_number, "Street Number" %>
+        </td>
+        <td>
+          <%= address_f.text_field :street_number %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= address_f.label :street_name, "Street Name" %>
+        </td>
+        <td>
+          <%= address_f.text_field :street_name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= address_f.label :city, "City" %>
+        </td>
+        <td>
+          <%= address_f.text_field :city %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= address_f.label :state, "State" %>
+        </td>
+        <td>
+          <%= address_f.select :state, options_for_select(["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]) %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= address_f.label :zip_code, "Zip Code" %>
+        </td>
+        <td>
+          <%= address_f.text_field :zip_code %>
+        </td>
+      </tr>
+      <% end %>
+      <tr>
+        <td>
+          <%= f.submit %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>

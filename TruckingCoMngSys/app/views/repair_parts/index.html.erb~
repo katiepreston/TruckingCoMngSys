@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Repair Parts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @repair_parts.each do |repair_part| %>
+      <tr>
+        <td><%= link_to 'Show', repair_part %></td>
+        <td><%= link_to 'Edit', edit_repair_part_path(repair_part) %></td>
+        <td><%= link_to 'Destroy', repair_part, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Repair part', new_repair_part_path %>

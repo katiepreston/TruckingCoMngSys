@@ -1,0 +1,77 @@
+<% content_for :title do %>
+Vehicles
+<% end %>
+
+
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Vehicles</h1>
+
+<table>
+  <tbody>
+    <% if @vehicles.size == 0 %>
+    <tr>
+      <td>
+        There are no vehicle records
+      </td>
+    </tr>
+    <% else %>
+    <tr>
+      <td>
+        ID Number
+      </td>
+      <td>
+        Type
+      </td>
+      <td>
+        Year
+      </td>
+      <td>
+        Brand
+      </td>
+      <td>
+        Model
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+    </td>
+    <% @vehicles.each do |vehicle| %>
+      <tr>
+        <td>
+          <%= vehicle.id %>
+        </td>
+        <td>
+          <%= vehicle.vehicle_type %>
+        </td>
+        <td>
+          <%= vehicle.year %>
+        </td>
+        <td>
+          <%= vehicle.brand %>
+        </td>
+        <td>
+          <%= vehicle.vehicle_model %>
+        </td>
+        <td><%= link_to 'Show', vehicle %></td>
+        <td><%= link_to 'Edit', edit_vehicle_path(vehicle) %></td>
+        <td><%= link_to 'Destroy', vehicle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    <% end %> <!-- if -->
+  </tbody>
+</table>
+
+<div>
+<%= link_to 'New Vehicle', new_vehicle_path %>
+</div>
+
+<div>
+<%= link_to 'Generate Monthly Maintenance Report', action: 'maintenanceReportsSetup' %> |
+<%= link_to "View Archive", action: "archive" %>
+</div>
+
+<div>
+<%= link_to 'Home', controller: "logins", action: "landing" %>
+</div>

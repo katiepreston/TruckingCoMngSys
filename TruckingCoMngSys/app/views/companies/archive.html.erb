@@ -1,0 +1,47 @@
+<% content_for :title do %>
+Companies Archive
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Companies Archive</h1>
+
+<table>
+  <tbody>
+    <% if @companies.size == 0 %>
+      <tr>
+        <td>
+          There are no customer records
+        </td>
+      </tr>
+    <% else %>
+    <tr>
+      <td>
+        Name
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+    </tr>
+    <% @companies.each do |company| %>
+      <tr>
+        <td><%= company.name %></td>
+        <td><%= link_to 'Show', company %></td>
+        <td><%= link_to 'Edit', edit_company_path(company) %></td>
+        <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %> <!-- each -->
+    <% end %> <!-- if -->
+  </tbody>
+</table>
+
+<br>
+
+<div>
+<%= link_to 'Back', action: "index" %>
+</div>
+
+<div>
+<%= link_to 'Home', controller: "logins", action: "landing" %>
+</div>
