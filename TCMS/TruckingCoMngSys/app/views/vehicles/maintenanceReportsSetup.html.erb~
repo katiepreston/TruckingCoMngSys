@@ -1,0 +1,34 @@
+<% content_for :title do %>
+Monthly Maintenance Report Setup
+<% end %>
+
+<%= form_tag( {action: "maintenanceReports"}, method: :post) do %>
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          Month
+        </td>
+        <td>
+          <%= select_tag :month, options_for_select( [["January", 1], ["February", 2], ["March", 3], ["April", 4], ["May", 5], ["June", 6], ["July", 7], ["August", 8], ["September", 9], ["October", 10], ["November", 11], ["December", 12]], DateTime.now.month ) %>
+        </td>
+      <tr>
+        <td>
+          Year
+        </td>
+        <td>
+          <%= select_tag :year, options_for_select( (2000..((DateTime.now + 10.years).year)), DateTime.now.year ) %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= submit_tag "Get Report" %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
+
+<div>
+<%= link_to "Back", action: "index" %>
+</div>

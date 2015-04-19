@@ -1,0 +1,2 @@
+module RepairRecordsHelper
+end

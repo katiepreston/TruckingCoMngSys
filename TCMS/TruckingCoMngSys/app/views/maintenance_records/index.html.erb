@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Maintenance Records</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Vehicle</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @maintenance_records.each do |maintenance_record| %>
+      <tr>
+        <td><%= maintenance_record.vehicle %></td>
+        <td><%= link_to 'Show', maintenance_record %></td>
+        <td><%= link_to 'Edit', edit_maintenance_record_path(maintenance_record) %></td>
+        <td><%= link_to 'Destroy', maintenance_record, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div>
+<%= link_to 'New Maintenance record', new_maintenance_record_path %>
+</div>
+
+<div>
+<%= link_to 'Home', controller: "logins", action: "landing" %>
+</div>

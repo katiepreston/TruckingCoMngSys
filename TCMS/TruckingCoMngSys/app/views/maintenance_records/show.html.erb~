@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Viewing Maintenance Record</h1>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+        Time Performed
+      </td>
+      <td>
+        Maintenance Type
+      </td>
+    </tr>
+    <% @maintenance_record.maintenance_items.each do |item| %>
+    <tr>
+      <td>
+        <%= item.maintenance_type.performed_at.strftime("%-m/%-d/%Y %l:%M %p") %>
+      </td>
+      <td>
+        <% if item.maintenance_type_type == "RoutineInspection" %>
+          Routine Inspection
+        <% elsif item.maintenance_type_type == "RepairRecord" %>
+          Repair Record
+        <% else %>
+          Routine Maintenance
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'Back', vehicle_path, id: params[:vid] %>

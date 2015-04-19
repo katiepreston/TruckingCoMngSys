@@ -1,0 +1,6 @@
+class Part < ActiveRecord::Base
+	belongs_to :part_user, polymorphic: true
+
+  validates :name, presence: true, uniqueness: true
+  validates :unit_cost, presence: true, numericality: { greater_than_or_equal_to: 0.0, less_than_or_equal_to: 999999.99, only_integer: true }
+end

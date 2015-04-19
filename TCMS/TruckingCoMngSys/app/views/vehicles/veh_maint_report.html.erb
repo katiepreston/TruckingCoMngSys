@@ -1,0 +1,68 @@
+<% content_for :title do %>
+Vehicle Maintenance Report
+<% end %>
+
+<h1>Maintenance Report For Vehicle #<%= params[:veh_id] %></h1>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+        Maintenance Type
+      </td>
+      <td>
+        Time Performed
+      </td>
+      <td>
+        Description
+      </td>
+      <td>
+        Cost
+      </td>
+    </tr>
+  <% @maintenance_items.each do |mi| %>
+    <tr>
+      <td>
+        <% if mi.maintenance_type_type == "RepairRecord" %>
+          Repair
+        <% elsif mi.maintenance_type_type == "RoutineInspection" %>
+          Routine Inspection
+        <% else %>
+          Routine Maintenance
+        <% end %>
+      </td>
+      <td>
+        <%= mi.maintenance_type.performed_at.strftime("%-m/%-d/%Y %l:%M %p") %>
+      </td>
+      <td style="max-width: 400px">
+        <%= mi.maintenance_type.description %>
+      </td>
+      <td>
+        <% if mi.maintenance_type_type == "RoutineInspection" %>
+          N/A
+        <% else %>
+          <%= "$%.2f" % mi.maintenance_type.parts.sum("total_cost") %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+    <tr>
+      <td>
+        <%= "&nbsp;".html_safe %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        Total Cost
+      </td>
+      <td>
+        <%= "$%.2f" % @overall_cost %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div>
+<%= link_to "Back", action: "show", id: params[:veh_id] %>
+</div>
+<%= link_to 'Home', controller: "logins", action: "landing" %>

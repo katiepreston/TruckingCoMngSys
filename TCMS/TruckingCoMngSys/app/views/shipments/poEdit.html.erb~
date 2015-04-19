@@ -1,0 +1,142 @@
+<% content_for :title do %>
+Purchase Order
+<% end %>
+
+<h1>Purchase Order</h1>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+        Item Description
+      </td>
+      <td>
+        Item Quantity
+      </td>
+      <td>
+        Item Status
+      </td>
+      <td>
+        Item Cost
+      </td>
+      <td>
+        Item Total Cost
+      <td>
+    </tr>
+    <% if !(@purchase_order.line_items.nil?) %>
+    <% @purchase_order.line_items.each do |li| %>
+    <tr>
+      <td>
+        <%= li.item.name %>
+      </td>
+      <td>
+        <%= li.quantity %>
+      </td>
+      <td>
+        <%= li.indicator %>
+      </td>
+      <td>
+        <%= "$%-.2f" % li.item.unit_cost %>
+      </td>
+      <td>
+        <%= "$%-.2f" % li.total_cost %>
+      </td>
+    <% if session[:account_type] != EmployeesController::Driver %>
+      <td>
+        <%= link_to "Remove", {action: "lineItemRemove", id: li.id, sid: @shipment.id}, method: :post, data: {confirm: "Are you sure?"} %>
+      </td>
+    <% end %>
+    </tr>
+    <% end %>
+    <% end %>
+    <tr>
+      <td>
+        <%= "&nbsp;".html_safe %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        Subtotal
+      </td>
+      <td>
+        <%= "$%-.2f" % @purchase_order.sub_total %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        Shipping (20%)
+      </td>
+      <td>
+        <%= "$%-.2f" % @purchase_order.shipping %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        Grand Total
+      </td>
+      <td>
+        <%= "$%-.2f" % @purchase_order.grand_total %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<% if session[:account_type] != EmployeesController::Driver %>
+<h2>Add A New Line Item</h2>
+
+<%= form_for @line_item, url: {action: "addItem"}, method: :post do |f| %>
+  <table>
+    <tbody>
+      <%= f.fields_for :item do |item| %>
+      <tr>
+        <td>
+          <%= item.label(:name, "Name") %>
+        </td>
+        <td>
+          <%= item.text_field(:name) %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= item.label(:unit_cost, "Unit Cost") %>
+        </td>
+        <td>
+          <%= item.text_field(:unit_cost) %>
+        </td>
+      </tr>
+      <% end %>
+      <tr>
+        <td>
+          <%= f.label(:quantity, "Quantity") %>
+        </td>
+        <td>
+          <%= f.select(:quantity) do %>
+            <% (1..9999).each do |n| %>
+              <%= content_tag :option, n.to_s %>
+            <% end %>
+          <% end %> 
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label(:indicator, "Status") %>
+        </td>
+        <td>
+          <%= f.select(:indicator, options_for_select(["unavailable", "shipped", "backorder"], "shipped")) %>
+        </td>
+      </tr>
+       <%= hidden_field_tag(:sid, params[:sid]) %>
+      <tr>
+        <td>
+          <%= f.submit("Add Line Item") %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
+
+<% end %>
+
+<div>
+<%= link_to "Back To Shipment", @shipment %>
+</div>

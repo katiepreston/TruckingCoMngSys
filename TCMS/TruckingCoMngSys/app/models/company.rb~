@@ -1,0 +1,7 @@
+class Company < ActiveRecord::Base
+	has_one :address, as: :addressable, dependent: :destroy
+	has_many :shipments
+	accepts_nested_attributes_for :address
+
+  validates :name, presence: true, uniqueness: true
+end

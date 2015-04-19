@@ -1,0 +1,69 @@
+<%= form_for @part, action: "update" do |f| %>
+<% if @part.errors.any? %>
+  <div id="error_explanation" >
+    <h2><%= pluralize(@part.errors.count, "error") %> prohibited this part from being saved:</h2>
+    <ul>
+    <% @part.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <%= f.label :name %>
+      </td>
+      <td>
+        <%= f.text_field :name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :is_in_stock, "In Stock?" %>
+      </td>
+      <td>
+        <%= f.check_box :is_in_stock, value: 1 %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :where_from, "Origin" %>
+      </td>
+      <td>
+        <%= f.text_field :where_from %>
+      </td>
+    </tr>
+  <% if params[:v] == 0 %>
+    <tr>
+      <td>
+        <%= f.label :unit_cost, "Unit Cost" %>
+      </td>
+      <td>
+        <%= f.text_field :unit_cost %>
+      </td>
+    </tr>
+  <% else %>
+    <%= f.hidden_field :unit_cost, value: "0" %>
+  <% end %>
+    <tr>
+      <td>
+        <%= f.label :quantity %>
+      </td>
+      <td>
+        <%= f.select :quantity, options_for_select((1..999), @part.quantity) %>
+      </td>
+    </tr>
+    <%= hidden_field_tag :vid, params[:vid] %>
+    <%= hidden_field_tag :mid, params[:mid] %>
+    <%= hidden_field_tag :v, params[:v] %>
+    <tr>
+      <td>
+        <%= f.submit "Update Part" %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<% end %>

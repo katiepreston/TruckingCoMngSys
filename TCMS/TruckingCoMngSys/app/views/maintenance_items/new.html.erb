@@ -1,0 +1,7 @@
+<p id="notice"><%= notice %></p>
+
+<h1>New Maintenance Item</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', Vehicle.find_by(id: params[:vid]).maintenance_record, vid: params[:vid] %>
