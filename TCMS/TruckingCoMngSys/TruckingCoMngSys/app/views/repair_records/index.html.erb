@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Repair Records</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @repair_records.each do |repair_record| %>
+      <tr>
+        <td><%= link_to 'Show', repair_record %></td>
+        <td><%= link_to 'Edit', edit_repair_record_path(repair_record) %></td>
+        <td><%= link_to 'Destroy', repair_record, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Repair record', new_repair_record_path %>
+
+<%= link_to 'Home', controller: "logins", action: "landing" %>

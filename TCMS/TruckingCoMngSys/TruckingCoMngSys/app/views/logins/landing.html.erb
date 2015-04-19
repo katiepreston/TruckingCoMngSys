@@ -1,0 +1,23 @@
+<% content_for :title do %>
+Full
+<% end %>
+
+<% if !notice.nil? %>
+<p id="notice"><%= notice %></p>
+<% end %>
+
+  <% if session[:account_type] == EmployeesController::Full %>
+    <%= link_to "Personnel Data", controller: "employees", action: "index" %>
+  <% end %>
+<% if session[:account_type] == EmployeesController::Full %>
+    <%= link_to "Customer Data", controller: "companies", action: "index" %>
+  <% end %>
+  <% if session[:account_type] == EmployeesController::Full || session[:account_type] == EmployeesController::Shipping \
+     || session[:account_type] == EmployeesController::Driver %>
+    <%= link_to "Shipping Data", controller: "shipments", action: "index" %>
+  <% end %>
+  <% if session[:account_type] == EmployeesController::Full || session[:account_type] == EmployeesController::Maintenance \
+    || session[:account_type] == EmployeesController::Shipping %>
+    <%= link_to "Equipment and Maintenance Data", vehicles_path %>
+  <% end %>
+

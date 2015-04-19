@@ -1,0 +1,16 @@
+<% content_for :title do %>
+Edit Shipment
+<% end %>
+
+<h1>Editing Shipment</h1>
+
+<%= render partial: 'edit_form' %>
+
+<div>
+<%= link_to 'Show', @shipment %> |
+<% if @shipment.is_outgoing == 1 %>
+<%= link_to 'Back', action: "outgoing" %>
+<% else %>
+<%= link_to 'Back', action: "incoming" %>
+<% end %>
+</div>

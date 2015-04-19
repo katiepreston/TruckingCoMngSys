@@ -1,0 +1,58 @@
+<% content_for :title do %>
+Show Vehicle
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Vehicle #<%= @vehicle.id %></h1>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+        Type
+      </td>
+      <td>
+        <%= @vehicle.vehicle_type %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Year
+      </td>
+      <td>
+        <%= @vehicle.year %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Brand
+      </td>
+      <td>
+        <%= @vehicle.brand %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Model
+      </td>
+      <td>
+        <%= @vehicle.vehicle_model %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div>
+<%= link_to "Part List", controller: "parts", action: "index", v: 1, vid: params[:id] %> |
+<%= link_to "Maintenance Record", controller: "maintenance_records", action: "edit", id: @vehicle.maintenance_record.id, vid: @vehicle.id %> |
+<%= link_to 'Edit', edit_vehicle_path(@vehicle) %> |
+<%= link_to 'Back', vehicles_path %>
+</div>
+
+<div>
+<%= link_to "Maintenance Report", action: "veh_maint_report", veh_id: params[:id] %> 
+</div>
+<div>
+<%= link_to 'Home', controller: "logins", action: "landing" %>
+</div>

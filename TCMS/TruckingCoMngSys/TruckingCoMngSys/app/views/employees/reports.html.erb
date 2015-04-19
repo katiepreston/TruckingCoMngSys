@@ -1,0 +1,41 @@
+<% content_for :title do %>
+Monthly Payroll Report
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Monthly Payroll Report For <%= @seek_month_start.strftime("%B %Y") %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <td><%= "Last Name" %></td>
+    <td><%= "First Name" %></td>
+    <td><%= "Middle Name" %></td>
+    <td><%= "Pay Rate" %></td>
+    <tr class="blank_row">
+        <td colspan="3"></td>
+    </tr>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td><%= employee.last_name %></td>
+        <td><%= employee.first_name %></td>
+        <td><%= employee.middle_name %></td>
+        <td><%= "$%.2f" % employee.pay_rate %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div>
+<%= link_to 'Back', employees_path %>
+</div>
+
+<div>
+<%= link_to 'Home', controller: "logins", action: "landing" %>
+</div>

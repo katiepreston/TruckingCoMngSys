@@ -1,0 +1,2 @@
+module RoutineMaintenancesHelper
+end

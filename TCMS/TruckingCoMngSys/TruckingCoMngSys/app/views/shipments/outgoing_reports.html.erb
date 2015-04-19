@@ -1,0 +1,78 @@
+<% content_for :title do %>
+Outgoing Shipments Report
+<% end %>
+<p id="notice"><%= notice %></p>
+
+<h1>Outgoing Shipments Report</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>
+        Destination Company
+      </th>
+      <th>
+        Departure
+      </th>
+      <th>
+        Estimated Arrival
+      </th>
+      <th>
+        Total Revenue
+      </th>
+      <th>
+        Payment Received
+      </th>
+    </tr>
+    <tr class="blank_row">
+        <td colspan="3"></td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shipments.each do |shipment| %>
+      <tr>
+        <td>
+          <%= shipment.company.name %>
+        </td>
+        <td>
+          <%= shipment.departed_at.strftime("%-m/%-d/%Y %l:%M %p") %>
+        </td>
+        <td>
+          <%= shipment.arrived_at.strftime("%-m/%-d/%Y %l:%M %p") %>
+        </td>
+        <td>
+          <%= "$%.2f" % shipment.purchase_order.grand_total %>
+        </td>
+        <td>
+          <% if shipment.payment_received == 1 %>
+            Yes
+          <% else %>
+            No
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+      <tr>
+        <td>
+          <%= "&nbsp;".html_safe %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          Total Cost
+        </td>
+        <td>
+          <%= "$%.2f" % @overall_cost %>
+        </td>
+      </tr>
+  </tbody>
+</table>
+
+<div>
+<%= link_to 'Back', shipments_path %>
+</div>
+
+<div>
+<%= link_to 'Home', controller: "logins", action: "landing" %>
+</div>

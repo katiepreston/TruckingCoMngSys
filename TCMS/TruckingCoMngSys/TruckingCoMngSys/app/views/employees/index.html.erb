@@ -1,0 +1,54 @@
+<% content_for :title do %>
+Employees Listing
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Employees</h1>
+
+<table>
+  <tbody>
+    <% if @employees.size == 0 %>
+      <tr>
+        <td>
+          There are no employee records
+        </td>
+      </tr>
+    <% else %>
+    <tr>
+      <td>
+        Name
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+    </tr>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td><%= employee.last_name + ", " + employee.first_name + " " + employee.middle_name %></td>
+        <td><%= link_to 'Show', employee %></td>
+        <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
+      <% if session[:user] != employee.id %>
+        <td><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+      </tr>
+    <% end %>
+    <% end %> <!-- if -->
+  </tbody>
+</table>
+
+<br>
+
+<div>
+<%= link_to 'New Employee', new_employee_path %>
+</div>
+
+<div>
+<%= link_to 'Generate Monthly Payroll Report', action: 'reportSetup' %> |
+<%= link_to "View Archive", action: "archive" %>
+</div>
+
+<div>
+<%= link_to 'Home', controller: "logins", action: "landing" %>
+</div>

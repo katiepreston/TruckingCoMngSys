@@ -1,0 +1,43 @@
+<% content_for :title do %>
+Show Company
+<% end %>
+
+<p id="notice"><%= notice %></p>
+<h1>Company #<%= @company.id %></h1>
+<table>
+  <tbody>
+    <tr>
+      <td>
+        Name
+      </td>
+      <td>
+        <%= @company.name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Address
+      </td>
+      <td>
+        <%= "#{@company.address.street_number} #{@company.address.street_name}" %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+	City/State/Zip
+      </td>
+      <td>
+        <%= "#{@company.address.city} #{@company.address.state} #{@company.address.zip_code}" %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<div>
+<%= link_to 'Edit', edit_company_path(@company) %> |  <%= link_to 'Back', companies_path %>
+</div>
+
+<div>
+<%= link_to 'Home', controller: "logins", action: "landing" %>
+</div>
