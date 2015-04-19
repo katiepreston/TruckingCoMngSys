@@ -1,5 +1,0 @@
-<h1>New Vehicle Inspection</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', vehicle_inspections_path %>

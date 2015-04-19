@@ -1,5 +1,0 @@
-<h1>New Repair Part</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', repair_parts_path %>

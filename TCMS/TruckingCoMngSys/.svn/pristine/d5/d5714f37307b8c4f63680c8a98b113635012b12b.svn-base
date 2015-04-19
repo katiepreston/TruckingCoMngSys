@@ -1,6 +1,0 @@
-<h1>Editing Repair Record</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @repair_record %> |
-<%= link_to 'Back', repair_records_path %>
